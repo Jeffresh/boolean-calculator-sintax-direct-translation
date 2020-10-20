@@ -19,8 +19,8 @@ The boolean calculator allow this operations represented by the examples of this
 | z := true or not (x and not y); |                 |
 
 - There are `Id's ` 
-- There are`or`  binary and left asociative.
-- Tjere are `and` and is binary and left asociative and more priority than the `or` operator.
+- There are `or`  binary and left asociative.
+- There are `and` and is binary and left asociative and more priority than the `or` operator.
 - There are asign operator `:=`
 - There are print sentence `print *values*`
 - There are `True` and `False` constants.
