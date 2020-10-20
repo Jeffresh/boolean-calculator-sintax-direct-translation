@@ -35,7 +35,7 @@ Design the grammar for a bottom-top translator with his translation scheme.
 
 | Sintactic rules                  | Semantic rules                        |
 |----------------------------------|---------------------------------------|
-| entry -> `print` def;            | write('The result is {expr.s};')      |
+| entry -> `print` expr ;            | write('The result is {expr.s} ;')      |
 | entry -> ϵ                       |                                       |
 | def -> asign ;                   |                                       |
 | asign -> ID `=` asign            | table[ID] = expr.s                    |
