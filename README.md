@@ -33,13 +33,31 @@ The boolean calculator allow this operations represented by the examples of this
 
 Design the grammar for a bottom-top translator with his translation scheme.
 
+| Sintactic rules                  | Semantic rules                        |
+|----------------------------------|---------------------------------------|
+| entry -> `print` def;            | write('The result is {expr.s};')      |
+| entry -> ϵ                       |                                       |
+| def -> asign ;                   |                                       |
+| asign -> ID `=` asign            | table[ID] = expr.s                    |
+| asign -> expr                    | asign.s = expr.s                      |
+| expr -> exprOR                   | expr.s = exprOR.s                     |
+| exprOR -> exprOR 'or' exprAND    | exprOR.s = exprOR_1.s or exprAND.s    |
+| exprOR -> exprAND                | exprOR.s = exprAND                    |
+| exprAND -> exprAND 'and' boolean | exprAND.s = exprAND_1.s and boolean.s |
+| boolean -> not boolean           | boolean.s = !boolean                  |
+| boolean -> `CBOOLEAN`            | boolean.s = `CBOOLEAN`.lexval         |
+| boolean -> ID                    | boolean.s = table[ID]                 |
+| boolean -> `(` expr `)`          | boolean.s = expr.s                    |
+
+
+
 ### Stage: 2
 
 Adapt the grammar for a top-bottom translator.
 
 ### Stage: 3
 
-Add the translation scheme to stage 2
+Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 
 ### Stage: 4
 
