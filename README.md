@@ -1,2 +1,4 @@
-# boolean-calculator-sintax-direct-translation
-Design grammar and implement a top-down/ bottom-top translator that represent a boolean calculator using python.
+# Sintax direct translation: Boolean Calculator
+
+## Abstract
+Design of grammar and his implementation using a top-down/ bottom-top analyzer/translator that represent a boolean calculator using python.
