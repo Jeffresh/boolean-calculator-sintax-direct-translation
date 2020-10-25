@@ -35,7 +35,7 @@ Design the grammar for a bottom-top translator with his translation scheme.
 
 | Sintactic rules                  | Semantic rules                        |
 |----------------------------------|---------------------------------------|
-| entry -> `print` expr ;            | write('The result is {expr.s} ;')      |
+| entry -> `print` expr ;          | write('The result is {expr.s} ;')     |
 | entry -> ϵ                       |                                       |
 | def -> asign ;                   |                                       |
 | asign -> ID `=` asign            | table[ID] = expr.s                    |
@@ -53,7 +53,27 @@ Design the grammar for a bottom-top translator with his translation scheme.
 
 ### Stage: 2
 
-Adapt the grammar for a top-bottom translator.
+Adapt the grammar for a top-bottom translator. For do that we have to transform the left recursion to right recursion and refactorize the resulting grammar.
+
+| Sintactic rules                    |
+|------------------------------------|
+| entry -> `print` def;              |
+| entry -> e                         |
+| def -> asign ;                     |
+| asign -> ID `=` asign              |
+| asign -> expr                      |
+| expr -> exprOR                     |
+| exprOR -> exprAND exprOR'          |
+| exprOR' -> 'or' exprAND exprOR'    |
+| exprOR' -> e                       |
+| exprAND -> boolean exprAND'        |
+| exprAND' -> 'and' boolean exprAND' |
+| exprAND' -> e                      |
+| boolean -> not boolean             |
+| boolean -> `CBOOLEAN`              |
+| boolean -> ID                      |
+| boolean -> `(` expr `)`            |
+
 
 ### Stage: 3
 
