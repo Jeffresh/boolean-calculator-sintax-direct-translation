@@ -42,9 +42,10 @@ Design the grammar for a bottom-top translator with his translation scheme.
 | asign -> expr                    | asign.s = expr.s                      |
 | expr -> exprOR                   | expr.s = exprOR.s                     |
 | exprOR -> exprOR 'or' exprAND    | exprOR.s = exprOR_1.s or exprAND.s    |
-| exprOR -> exprAND                | exprOR.s = exprAND                    |
+| exprOR -> exprAND                | exprOR.s = exprAND.s                  |
 | exprAND -> exprAND 'and' boolean | exprAND.s = exprAND_1.s and boolean.s |
-| boolean -> not boolean           | boolean.s = !boolean                  |
+| exprAND -> boolean               | exprAND.s = boolean.s                 |
+| boolean -> not boolean           | boolean.s = !boolean.s                |
 | boolean -> `CBOOLEAN`            | boolean.s = `CBOOLEAN`.lexval         |
 | boolean -> ID                    | boolean.s = table[ID]                 |
 | boolean -> `(` expr `)`          | boolean.s = expr.s                    |
