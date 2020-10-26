@@ -55,21 +55,19 @@ Adapt the grammar for a top-bottom translator. For do that we have to transform 
 
 | Sintactic rules                    |
 |------------------------------------|
-| entry -> `print` def;              |
-| entry -> e                         |
-| def -> asign ;                     |
-| asign -> ID `=` asign              |
-| asign -> expr                      |
+| entry -> `print` exprOR `;`        |
+| def -> asign `;`                   |
+| asign -> `ID` `=` exprOR           |
 | expr -> exprOR                     |
 | exprOR -> exprAND exprOR'          |
-| exprOR' -> 'or' exprAND exprOR'    |
+| exprOR' -> `or` exprAND exprOR'    |
 | exprOR' -> e                       |
 | exprAND -> boolean exprAND'        |
-| exprAND' -> 'and' boolean exprAND' |
+| exprAND' -> `and` boolean exprAND' |
 | exprAND' -> e                      |
 | boolean -> not boolean             |
 | boolean -> `CBOOLEAN`              |
-| boolean -> ID                      |
+| boolean -> `ID`                    |
 | boolean -> `(` expr `)`            |
 
 
