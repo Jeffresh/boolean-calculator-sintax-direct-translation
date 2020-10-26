@@ -35,16 +35,16 @@ Design the grammar for a bottom-top translator with his translation scheme.
 
 | Sintactic rules                  | Semantic rules                        |
 |----------------------------------|---------------------------------------|
-| entry -> `print` exprOR `;`      | write('The result is {exprOR.s} ;') |
+| entry -> `print` exprOR `;`      | write('The result is {exprOR.s} ;')   |
 | entry -> asign `;`               |                                       |
-| asign -> `ID` `=` exprOR         | table[ID] = exprOR.s                  |
+| asign -> `ID` `=` exprOR         | table[ID.lexval] = exprOR.s           |
 | exprOR -> exprOR `or` exprAND    | exprOR.s = exprOR_1.s or exprAND.s    |
 | exprOR -> exprAND                | exprOR.s = exprAND.s                  |
 | exprAND -> exprAND `and` boolean | exprAND.s = exprAND_1.s and boolean.s |
 | exprAND -> boolean               | exprAND.s = boolean.s                 |
 | boolean -> `not` boolean         | boolean.s = !boolean.s                |
 | boolean -> `CBOOLEAN`            | boolean.s = `CBOOLEAN`.lexval         |
-| boolean -> `ID`                  | boolean.s = table[ID]                 |
+| boolean -> `ID`                  | boolean.s = table[ID.leval]           |
 | boolean -> `(` exprOR `)`        | boolean.s = exprOR.s                  |
 
 
