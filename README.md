@@ -77,7 +77,6 @@ Adapt the grammar for a top-bottom translator. For do that we have to transform 
 | entry -> `print` exprOR `;`        |
 | def -> asign `;`                   |
 | asign -> `ID` `=` exprOR           |
-| expr -> exprOR                     |
 | exprOR -> exprAND exprOR'          |
 | exprOR' -> `or` exprAND exprOR'    |
 | exprOR' -> e                       |
@@ -87,7 +86,7 @@ Adapt the grammar for a top-bottom translator. For do that we have to transform 
 | boolean -> not boolean             |
 | boolean -> `CBOOLEAN`              |
 | boolean -> `ID`                    |
-| boolean -> `(` expr `)`            |
+| boolean -> `(` exprOR `)`            |
 
 
 ### Stage: 3
