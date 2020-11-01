@@ -86,12 +86,28 @@ Adapt the grammar for a top-bottom translator. For do that we have to transform 
 | boolean -> not boolean             |
 | boolean -> `CBOOLEAN`              |
 | boolean -> `ID`                    |
-| boolean -> `(` exprOR `)`            |
+| boolean -> `(` exprOR `)`          |
 
 
 ### Stage: 3
 
 Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
+
+| Sintactic rules                    |Semantic rules
+|------------------------------------|------------------------------------|
+| entry -> `print` exprOR `;`        |write('The result is {exprOR.s} ;') |
+| def -> asign `;`                   |                                    |
+| asign -> `ID` `=` exprOR           |Table[ID] = exprOR.s                |
+| exprOR -> exprAND exprOR'          |exprOR'.h = exprAND.s ,exprOR.s = exprOR'.s|
+| exprOR' -> `or` exprAND exprOR_1'  |exprOR_1.h = exprAND.s or exprOR'.h, exprOR'.s = exprOR'_1.s|
+| exprOR' -> e                       |exprOR'.s = exprOR'.h|
+| exprAND -> boolean exprAND'        |exprAND exprAND.h = boolean.s exprAND' exprAND.s = exprAND's|
+| exprAND' -> `and` boolean exprAND_1' | exprAND_1'.h = exprAND.h and boolean.s, exprAND'.s = exprAND_1'.s |
+| exprAND' -> e                      |exprAND'.s = exprAND.h|
+| boolean -> not boolean_1           |boolean.s = not boolean_1.s|
+| boolean -> `CBOOLEAN`              |boolean.s = CBOOLEAN.lexval|
+| boolean -> `ID`                    |boolean.s = table[ID]|
+| boolean -> `(` exprOR `)`          |boolean.s = exprOR.s|
 
 ### Stage: 4
 
