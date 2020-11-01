@@ -75,7 +75,7 @@ Adapt the grammar for a top-bottom translator. For do that we have to transform 
 | Sintactic rules                    |
 |------------------------------------|
 | entry -> `print` exprOR `;`        |
-| def -> asign `;`                   |
+| entry -> asign `;`                   |
 | asign -> `ID` `=` exprOR           |
 | exprOR -> exprAND exprOR'          |
 | exprOR' -> `or` exprAND exprOR'    |
@@ -96,7 +96,7 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 | Sintactic rules                    |Semantic rules
 |------------------------------------|------------------------------------|
 | entry -> `print` exprOR `;`        |write('The result is {exprOR.s} ;') |
-| def -> asign `;`                   |                                    |
+| entry -> asign `;`                   |                                    |
 | asign -> `ID` `=` exprOR           |Table[ID.lexval] = exprOR.s                |
 | exprOR -> exprAND exprOR'          |exprOR'.h = exprAND.s ,exprOR.s = exprOR'.s|
 | exprOR' -> `or` exprAND exprOR_1'  |exprOR_1.h = exprAND.s or exprOR'.h, exprOR'.s = exprOR'_1.s|
@@ -114,7 +114,7 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 |Translation scheme                                                                                   |
 |-----------------------------------------------------------------------------------------------------|
 | entry -> `print` exprOR `;`{write('The result is {exprOR.s} ;')}                                    |
-| def -> asign `;`                                                                                    |
+| entry -> asign `;`                                                                                    |
 | asign -> `ID` `=` exprOR   { Table[ID] = exprOR.s }                                                 |
 | exprOR -> exprAND { exprOR'.h = exprAND.s} exprOR' { exprOR.s = eprOR' }                            |
 | exprOR' -> `or` exprAND { exprOR_1'.h = exprOR.h or exprAND.s } exprOR_1' { exprOR'.s = exprOR_1.s }|
