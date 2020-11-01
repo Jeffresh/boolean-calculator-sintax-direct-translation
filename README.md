@@ -57,11 +57,11 @@ Design the grammar for a bottom-top translator with his translation scheme.
 | entry -> `print` exprOR `;` { write('The result is {exprOR.s} ;') }       |
 | entry -> asign `;`                                                        |                                       
 | asign -> `ID` `=` exprOR { table[ID.lexval] = exprOR.s }                  | 
-| exprOR -> exprOR `or` exprAND { exprOR.s = exprOR_1.s or exprAND.s }      | 
+| exprOR -> exprOR_1 `or` exprAND { exprOR.s = exprOR_1.s or exprAND.s }      | 
 | exprOR -> exprAND { exprOR.s = exprAND.s }                                | 
-| exprAND -> exprAND `and` boolean { exprAND.s = exprAND_1.s and boolean.s }| 
+| exprAND -> exprAND_1 `and` boolean { exprAND.s = exprAND_1.s and boolean.s }| 
 | exprAND -> boolean { exprAND.s = boolean.s }                              | 
-| boolean -> `not` boolean { boolean.s = !boolean.s }                       | 
+| boolean -> `not` boolean_1 { boolean.s = !boolean_1.s }                       | 
 | boolean -> `CBOOLEAN` { boolean.s = `CBOOLEAN`.lexval }                   | 
 | boolean -> `ID` { boolean.s = table[ID.leval] }                           |
 | boolean -> `(` exprOR `)` { boolean.s = exprOR.s }                        |
@@ -97,7 +97,7 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 |------------------------------------|------------------------------------|
 | entry -> `print` exprOR `;`        |write('The result is {exprOR.s} ;') |
 | def -> asign `;`                   |                                    |
-| asign -> `ID` `=` exprOR           |Table[ID] = exprOR.s                |
+| asign -> `ID` `=` exprOR           |Table[ID.lexval] = exprOR.s                |
 | exprOR -> exprAND exprOR'          |exprOR'.h = exprAND.s ,exprOR.s = exprOR'.s|
 | exprOR' -> `or` exprAND exprOR_1'  |exprOR_1.h = exprAND.s or exprOR'.h, exprOR'.s = exprOR'_1.s|
 | exprOR' -> e                       |exprOR'.s = exprOR'.h|
@@ -106,8 +106,27 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 | exprAND' -> e                      |exprAND'.s = exprAND.h|
 | boolean -> not boolean_1           |boolean.s = not boolean_1.s|
 | boolean -> `CBOOLEAN`              |boolean.s = CBOOLEAN.lexval|
-| boolean -> `ID`                    |boolean.s = table[ID]|
+| boolean -> `ID`                    |boolean.s = table[ID.lexval]|
 | boolean -> `(` exprOR `)`          |boolean.s = exprOR.s|
+
+### Translation scheme
+
+|Translation scheme                                                                                   |
+|-----------------------------------------------------------------------------------------------------|
+| entry -> `print` exprOR `;`{write('The result is {exprOR.s} ;')}                                    |
+| def -> asign `;`                                                                                    |
+| asign -> `ID` `=` exprOR   { Table[ID] = exprOR.s }                                                 |
+| exprOR -> exprAND { exprOR'.h = exprAND.s} exprOR' { exprOR.s = eprOR' }                            |
+| exprOR' -> `or` exprAND { exprOR_1'.h = exprOR.h or exprAND.s } exprOR_1' { exprOR'.s = exprOR_1.s }|
+| exprOR' -> e { exprOR'.s = exprOR'.h }                                                              |
+| exprAND -> boolean { exprAND'.h = boolean.s } exprAND' { exprAND.s = exprAND'.s }                   |
+| exprAND' -> `and` boolean { exprAND_1.h = exprAND'.h and boolean.s} exprAND_1'{exprAND'.s = exprAND_1'.s } |
+| exprAND' -> e { exprAND'.s = exprAND'.h }                                                           |
+| boolean -> not boolean_1 { boolean.s = not boolean_1.s }                                            |
+| boolean -> `CBOOLEAN` { boolean.s = CBOOLEAN.lexval }                                               |
+| boolean -> `ID` { boolean.s = table[ID.lexval] }                                                    |
+| boolean -> `(` exprOR `)` { boolean.s = exprOR.s }                                                  |
+
 
 ### Stage: 4
 
