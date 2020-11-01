@@ -131,3 +131,5 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 ### Stage: 4
 
 Implement the top-bottom recursive translator resuling from stage 3 using *Python*.
+
+[Python implementation notebook](/src/boolean_calculator.ipynb)
