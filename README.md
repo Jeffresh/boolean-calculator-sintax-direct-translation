@@ -96,7 +96,7 @@ Add the translation scheme to stage 2 adapting the semantic rules of stage 1.
 | Sintactic rules                    |Semantic rules
 |------------------------------------|------------------------------------|
 | entry -> `print` exprOR `;`        |write('The result is {exprOR.s} ;') |
-| entry -> asign `;`                   |                                    |
+| entry -> asign `;`                 |                                    |
 | asign -> `ID` `=` exprOR           |Table[ID.lexval] = exprOR.s                |
 | exprOR -> exprAND exprOR'          |exprOR'.h = exprAND.s ,exprOR.s = exprOR'.s|
 | exprOR' -> `or` exprAND exprOR_1'  |exprOR_1.h = exprAND.s or exprOR'.h, exprOR'.s = exprOR'_1.s|
